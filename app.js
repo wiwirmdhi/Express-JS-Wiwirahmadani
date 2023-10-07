@@ -1,39 +1,22 @@
-const express = require('express');
-const sequelize = require('./db');
-const Actor = require('./models/Actor');
-
+const express = require("express");
+const bodyParser = require("body-parser");
+const db = require("./db");
 const app = express();
+const port = 3000;
 
-// Middleware untuk mengizinkan parsing JSON
-app.use(express.json());
+app.use(bodyParser.json());
 
-// Routes
-app.get('/films', async (req, res) => {
-  // Tampilkan data seluruh list film
-  // Implementasi query sesuai kebutuhan
-});
+// Query untuk menampilkan data
+const query = require("./query");
 
-app.get('/films/:id', async (req, res) => {
-  const filmId = req.params.id;
-  // Tampilkan data film tertentu berdasarkan id
-  // Implementasi query sesuai kebutuhan
-});
+// Routing untuk menampilkan data
+const route = require("./route");
 
-app.get('/categories', async (req, res) => {
-  // Tampilkan data list category
-  // Implementasi query sesuai kebutuhan
-});
+app.get("/films", route.getAllFilms);
+app.get("/films/:id", route.getFilmById);
+app.get("/categories", route.getAllCategories);
+app.get("/films/category/:categoryId", route.getFilmsByCategory);
 
-app.get('/films/category/:category', async (req, res) => {
-  const category = req.params.category;
-  // Tampilkan data list film berdasarkan category
-  // Implementasi query sesuai kebutuhan
-});
-
-// Jalankan server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, async () => {
-  console.log(`Server berjalan di port ${PORT}`);
-  await sequelize.authenticate();
-  console.log('Terhubung ke database MySQL');
+app.listen(port, () => {
+  console.log(`Server berjalan di port ${port}`);
 });

@@ -1,10 +1,10 @@
-const pgp = require('pg-promise')();
+const pgp = require("pg-promise")();
 const connection = {
-  host: 'localhost',
+  host: "localhost",
   port: 5432,
-  database: 'dvdrental', 
-  user: 'username', 
-  password: 'password' 
+  database: "dvdrental",
+  user: "wiwirahmadani",
+  password: "belajar1234",
 };
 
 const db = pgp(connection);
